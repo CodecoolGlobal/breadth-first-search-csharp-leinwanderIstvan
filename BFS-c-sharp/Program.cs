@@ -10,14 +10,19 @@ namespace BFS_c_sharp
         {
             RandomDataGenerator generator = new RandomDataGenerator();
             List<UserNode> users = generator.Generate();
-
+            BreadthFirstSearch breadthFirstSearch = new BreadthFirstSearch();
             foreach (var user in users)
             {
                 Console.WriteLine(user);
             }
-
-            Console.WriteLine("Done");
+            
+            
+            int distance = breadthFirstSearch.DistanceBetweenUsers(users[0], users[1]);
+            Console.WriteLine("Distance between friends: " + distance);
+            Console.WriteLine("Friends of Friends: ");
+            breadthFirstSearch.ListFriendsOfFriendsAtDistance(users[0], 10);
             Console.ReadKey();
+            
         }
     }
 }
