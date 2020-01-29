@@ -13,6 +13,7 @@ namespace BFS_c_sharp
         public int DistanceBetweenUsers(UserNode from, UserNode to)
         {
             Queue<UserNode> searchInQueue = new Queue<UserNode>();
+            
             List<UserNode> visited = new List<UserNode>();
             
 
@@ -83,7 +84,10 @@ namespace BFS_c_sharp
                 int currentDistance;
                 distanceFromRoot.TryGetValue(CurrentUser, out currentDistance);
 
-                if (currentDistance > distance) { break; }
+                if (currentDistance > distance) 
+                { 
+                    break; 
+                }
 
                 foreach (var friend in CurrentUser.Friends)
                 {
