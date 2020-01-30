@@ -20,7 +20,7 @@ namespace BFS_c_sharp
             int distance = breadthFirstSearch.DistanceBetweenUsers(users[0], users[1]);
             Console.WriteLine("Distance between friends: " + distance);
             Console.WriteLine("Friends of Friends: ");
-            breadthFirstSearch.ListFriendsOfFriendsAtDistance(users[0], 10);
+            breadthFirstSearch.FriendsOfFriendsAtGivenDistance(users[0], 10);
             Console.ReadKey();
             
         }

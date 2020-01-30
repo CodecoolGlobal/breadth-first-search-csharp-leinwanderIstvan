@@ -27,20 +27,20 @@ namespace BFS_c_sharp
             searchInQueue.Enqueue(from);
             while (searchInQueue.Count > 0)
             {
-                UserNode nextUser = searchInQueue.Dequeue();
-                if (nextUser.Equals(to))
+                UserNode user = searchInQueue.Dequeue();
+                if (user.Equals(to))
                 {
                     break;
                 }
 
-                if (visited.Contains(nextUser))
+                if (visited.Contains(user))
                 {
                     continue;
                 }
 
-                visited.Add(nextUser);
+                visited.Add(user);
 
-                foreach (var friend in nextUser.Friends)
+                foreach (var friend in user.Friends)
                 {
                     if (!temp.Contains(friend))
                     {
@@ -51,9 +51,9 @@ namespace BFS_c_sharp
                 if (searchInQueue.Count == 0 && temp.Count > 0)
                 {
                     distance++;
-                    foreach (var user in temp)
+                    foreach (var nextUser in temp)
                     {
-                        searchInQueue.Enqueue(user);
+                        searchInQueue.Enqueue(nextUser);
                     }
                     temp.Clear();
                 }
@@ -65,24 +65,23 @@ namespace BFS_c_sharp
         }
 
 
-        public void ListFriendsOfFriendsAtDistance(UserNode user, int distance)
+        public void FriendsOfFriendsAtGivenDistance(UserNode user, int distance)
         {
             Queue<UserNode> toVisit = new Queue<UserNode>();
             HashSet<UserNode> visited = new HashSet<UserNode>();
-            Dictionary<UserNode, int> distanceFromRoot = new Dictionary<UserNode, int>();
+            
 
             HashSet<UserNode> friendOfFriends = new HashSet<UserNode>();
 
 
             toVisit.Enqueue(user);
             visited.Add(user);
-            distanceFromRoot.Add(user, 0);
-
+            
             while (toVisit.Count > 0)
             {
                 UserNode CurrentUser = toVisit.Dequeue();
-                int currentDistance;
-                distanceFromRoot.TryGetValue(CurrentUser, out currentDistance);
+                int currentDistance = 0;
+                
 
                 if (currentDistance > distance) 
                 { 
@@ -96,7 +95,8 @@ namespace BFS_c_sharp
                         toVisit.Enqueue(friend);
                         visited.Add(friend);
                         friendOfFriends.Add(friend);
-                        distanceFromRoot.Add(friend, currentDistance + 1);
+                       
+                        distance++;
                     }
                 }
             }
